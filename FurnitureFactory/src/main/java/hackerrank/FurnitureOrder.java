@@ -20,7 +20,7 @@ public class FurnitureOrder implements FurnitureOrderInterface {
         if (orderMap.containsKey(type))
             orderMap.merge(type, furnitureCount, (prev, one) -> prev + one);
         else
-            orderMap.put(type, 1);
+            orderMap.put(type, furnitureCount);
     }
 
     public HashMap<Furniture, Integer> getOrderedFurniture() {
@@ -32,11 +32,11 @@ public class FurnitureOrder implements FurnitureOrderInterface {
     }
 
     public int getTypeCount(Furniture type) {
-        return orderMap.getOrDefault(type.label(), 0);
+        return orderMap.getOrDefault(type, 0);
     }
 
     public float getTypeCost(Furniture type) {
-        return orderMap.getOrDefault(type.label(), 0) * type.cost();
+        return orderMap.getOrDefault(type, 0) * type.cost();
     }
 
     public int getTotalOrderQuantity() {
