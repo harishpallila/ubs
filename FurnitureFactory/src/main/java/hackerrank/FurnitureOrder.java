@@ -36,7 +36,7 @@ public class FurnitureOrder implements FurnitureOrderInterface {
     }
 
     public float getTypeCost(Furniture type) {
-        return orderMap.getOrDefault(type, 0) * type.cost();
+        return orderMap.getOrDefault(type, 0.0f) * type.cost();
     }
 
     public int getTotalOrderQuantity() {
