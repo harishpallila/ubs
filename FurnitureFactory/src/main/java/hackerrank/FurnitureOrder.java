@@ -18,7 +18,7 @@ public class FurnitureOrder implements FurnitureOrderInterface {
 
     public void addToOrder(final Furniture type, final int furnitureCount) {
         if (orderMap.containsKey(type))
-            orderMap.merge(type, 1, (prev, one) -> prev + one);
+            orderMap.merge(type, furnitureCount, (prev, one) -> prev + one);
         else
             orderMap.put(type, 1);
     }
