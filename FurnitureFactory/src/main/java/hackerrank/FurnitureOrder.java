@@ -6,40 +6,40 @@ public class FurnitureOrder implements FurnitureOrderInterface {
     /**
      * TODO: Create a map of Furniture items to order quantities
      */
+    
+    private final Map<Furniture, Integer> orderMap;
 
     /**
      * Initialize a new mapping of Furniture types to order quantities.
      */
     FurnitureOrder() {
-        // TODO: Complete the constructor
+        orderMap = new HashMap<Furniture, Integer>();
     }
 
     public void addToOrder(final Furniture type, final int furnitureCount) {
-        // TODO: Complete the method
+        if (orderMap.containsKey(type.label()))
+            orderMap.merge(type.label(), 1, (prev, one) -> prev + one);
+        else
+            orderMap.put(type.label(), 1);
     }
 
     public HashMap<Furniture, Integer> getOrderedFurniture() {
-        // TODO: Complete the method
-        return null;
+        return orderMap;
     }
 
     public float getTotalOrderCost() {
-        // TODO: Complete the method
-        return -1.0f;
+        return orderMap.isEmpty() ? 0.0f : orderMap.entrySet.stream().map(e -> e.getKey().cost() * e.getValue()).reduce(Float::sum).get();
     }
 
     public int getTypeCount(Furniture type) {
-        // TODO: Complete the method
-        return -1;
+        return orderMap.getOrDefault(type.label(), 0);
     }
 
     public float getTypeCost(Furniture type) {
-        // TODO: Complete the method
-        return -1.0f;
+        return orderMap.getOrDefault(type.label(), 0.0f) * type.cost();
     }
 
     public int getTotalOrderQuantity() {
-        // TODO: Complete the method
-        return -1;
+        return orderMap.isEmpty() ? 0 : orderMap.values().stream().reduce(Integer::sum).get();
     }
 }
